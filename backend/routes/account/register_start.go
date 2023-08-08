@@ -1,9 +1,12 @@
 package account
 
 import (
+	"log"
+	"os"
 	"regexp"
 	"strings"
 
+	"github.com/Unbreathable/sportfest/backend/caching"
 	"github.com/Unbreathable/sportfest/backend/util"
 	"github.com/gofiber/fiber/v2"
 )
@@ -12,7 +15,7 @@ type registerRequest struct {
 	Email string `json:"email"`
 }
 
-func registerAccount(c *fiber.Ctx) error {
+func registerStart(c *fiber.Ctx) error {
 
 	// Parse request
 	var req registerRequest
@@ -27,7 +30,24 @@ func registerAccount(c *fiber.Ctx) error {
 	}
 
 	// Check if it's a school email
+	schoolMail := strings.HasSuffix(email, os.Getenv("SCHOOL_MAIL"))
+	adminMail := strings.HasSuffix(email, os.Getenv("ADMIN_MAIL"))
 
+	if !schoolMail && !adminMail {
+		return util.FailedRequest(c, "Diese Email kann hier nicht benutzt werden!", nil)
+	}
+
+	// Add email to cache
+	token, valid := caching.AddEmailToVerify(email)
+	if !valid {
+		return util.FailedRequest(c, "Du hast bereits einen Code erhalten!", nil)
+	}
+
+	log.Println("Token:", token)
+
+	// TODO: Send code to email
+
+	return util.SuccessfulRequest(c)
 }
 
 const EmailRegex = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$"

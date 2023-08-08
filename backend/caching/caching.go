@@ -27,19 +27,34 @@ type EmailToken struct {
 	Verified bool   // Whether the email has been verified
 	Attempts int    // Number of attempts to verify the email
 	Code     string // Code to verify email
-	Year     string // Year of the account
+	Year     uint   // Year of the account
 	Password string // Password of the account
 }
 
 // Returns true if the email is in the cache
-func AddEmailToVerify(email string) bool {
-	return emailCache.SetWithTTL(email, EmailToken{
+func AddEmailToVerify(email string) (EmailToken, bool) {
+
+	// Check if email is already in cache
+	_, valid := emailCache.Get(email)
+	if valid {
+		return EmailToken{}, false
+	}
+
+	token := EmailToken{
 		Verified: false,
 		Attempts: 0,
 		Code:     util.GenerateToken(6),
-		Year:     "",
+		Year:     0,
 		Password: "",
-	}, 1, TokenTTL)
+	}
+	emailCache.SetWithTTL(email, token, 1, TokenTTL)
+
+	return token, true
+}
+
+// Removes the email from the cache
+func RemoveEmail(email string) {
+	emailCache.Del(email)
 }
 
 // Returns true if the email is verified (code can be empty)
@@ -64,4 +79,26 @@ func VerifyEmail(email string, code string) (EmailToken, bool) {
 	emailToken.Attempts++
 	emailCache.SetWithTTL(email, emailToken, 1, TokenTTL)
 	return emailToken, false
+}
+
+func SetPassword(email string, password string) {
+	token, valid := emailCache.Get(email)
+	if !valid {
+		return
+	}
+
+	emailToken := token.(EmailToken)
+	emailToken.Password = password
+	emailCache.SetWithTTL(email, emailToken, 1, TokenTTL)
+}
+
+func SetYear(email string, year uint) {
+	token, valid := emailCache.Get(email)
+	if !valid {
+		return
+	}
+
+	emailToken := token.(EmailToken)
+	emailToken.Year = year
+	emailCache.SetWithTTL(email, emailToken, 1, TokenTTL)
 }
