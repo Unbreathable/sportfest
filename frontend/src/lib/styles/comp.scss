@@ -1,0 +1,33 @@
+.button {
+    display: flex;
+    align-items: center;
+    gap: var(--def-spacing);
+    padding: var(--button-padding);
+    background-color: var(--primary);
+    color: var(--button-text);
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    transition: 250ms all ease;
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    width: max-content;
+
+    &:hover, &:focus {
+        background-color: var(--accent);
+    }
+}
+
+input {
+    padding: var(--input-padding);
+    border: 2px solid var(--secondary);
+    border-radius: 0.5rem;
+    transition: 250ms all ease;
+    outline: none;
+    color: var(--text);
+    font-size: 1.25rem;
+
+    &:focus {
+        border: 2px solid var(--accent);
+    }
+}

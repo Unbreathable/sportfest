@@ -6,7 +6,109 @@
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover">
+	<body class="dark" data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
+
+	<style>
+
+		body {
+			overflow: hidden;
+			color: var(--text);
+		}
+
+		.dark {
+			--text: #120b13;
+			--other-text: #424242;
+			--button-text: white;
+			--background: #FFFFFF;
+			--primary: #7a1f1f;
+			--secondary: #efc2c2;
+			--accent: #b62f2f;
+
+			--line-spacing: 1.25rem;
+			--def-spacing: 0.75rem;
+			--section-spacing: 1.5rem;
+
+			--button-padding: 0.75rem 1rem;
+			--input-padding: 0.75rem 1rem;
+			--modal-padding: 1.5rem;
+
+			--font-size-small: 1rem;
+			--font-size-medium: 1.25rem;
+			--font-size-large: 1.5rem;
+			--font-size-headline: 2rem;
+
+			font-family: "Poppins","Helvetica Neue",Arial,sans-serif;
+			background-color: var(--background);
+		}
+
+		p {
+			line-height: var(--line-spacing);
+		}
+
+		.clickable {
+			cursor: pointer;
+			user-select: none;
+		}
+
+		.ns {
+			user-select: none;
+		}
+
+		.icon-primary {
+			user-select: none;
+			color: var(--primary);
+		}
+
+		.hover-primary {
+			user-select: none;
+			transition: color 0.2s ease-in-out;
+		}
+
+		.hover-primary:hover {
+			color: var(--primary);
+		}
+
+		.icon-large {
+			user-select: none;
+			font-size: 2.5rem;
+		}
+
+		.icon-medium {
+			user-select: none;
+			font-size: 2rem;
+		}
+
+		.icon-small {
+			user-select: none;
+			font-size: 1.8rem;
+		}
+
+		.headline {
+			font-size: var(--font-size-headline);
+		}
+
+		.text-large {
+			font-size: var(--font-size-large);
+		}
+
+		.text-medium {
+			font-size: var(--font-size-medium);
+		}
+
+		.text-small {
+			font-size: var(--font-size-small);
+		}
+
+		.text-bg {
+			color: var(--other-text);
+		}
+
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+	</style>
 </html>

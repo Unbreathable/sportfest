@@ -1,0 +1,18 @@
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--section-spacing);
+    padding: var(--modal-padding);
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, .2);
+    border-radius: var(--def-spacing);
+    width: 90%;
+    max-width: 450px;
+
+    .comp {
+        display: flex;
+        flex-direction: column;
+        gap: var(--def-spacing);
+    }
+}
