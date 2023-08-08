@@ -1,5 +1,5 @@
 ## Sportfest
-**Sportfest is still work in progress.** Here is a list of things it will hopefully be able to do when it is fully stable:
+**Sportfest is still work in progress and will only be available in German, if anyone wants to translate it using a pull request, feel free to do so.** Here is a list of things it will hopefully be able to do when it is fully stable:
 
 Sportfest is a simple app to put together teams for games in a sports event based on interests people enter through a simple web frontend. It is only capable of dividing a large group of people into two dedicated teams for all the games specified in the admin panel.
 
