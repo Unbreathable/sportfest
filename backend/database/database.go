@@ -15,6 +15,7 @@ func Setup() {
 
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s", os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_PASS"), os.Getenv("DB_NAME"))
 
+	// Connect using postgres driver
 	var err error
 	DBConn, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -23,6 +24,7 @@ func Setup() {
 
 	log.Println("Connection opened to PostgreSQL")
 
-	DBConn.AutoMigrate()
+	// Migrate the schema
+	DBConn.AutoMigrate(&Account{}, &Game{}, &Match{}, &TeamMember{}, &Year{})
 
 }
