@@ -72,7 +72,7 @@
         padding: var(--def-spacing);
         width: 400px;
         max-width: 35%;
-        height: 100vh;
+        height: calc(100vh - 2 * var(--def-spacing));
         display: flex;
         flex-direction: column;
         gap: calc(var(--row-spacing)/2);

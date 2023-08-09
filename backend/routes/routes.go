@@ -3,6 +3,7 @@ package routes
 import (
 	"log"
 
+	"github.com/Unbreathable/sportfest/backend/routes/account"
 	"github.com/Unbreathable/sportfest/backend/util"
 	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
@@ -11,9 +12,10 @@ import (
 func SetupRoutes(router fiber.Router) {
 
 	// Unauthorized routes
+	router.Route("/account", account.SetupRoutes)
 
 	// Setup authorized routes
-	router.Route("/", AuthorizedRoutes)
+	router.Route("/arq", AuthorizedRoutes)
 }
 
 func AuthorizedRoutes(router fiber.Router) {
@@ -25,24 +27,21 @@ func AuthorizedRoutes(router fiber.Router) {
 			Key:    []byte(util.JWT_SECRET),
 		},
 
-		// Checks if the token is expired
+		// We don't do anything here since we don't care that much about security
 		SuccessHandler: func(c *fiber.Ctx) error {
-
-			if util.IsExpired(c) {
-				return util.InvalidRequest(c)
-			}
-
 			return c.Next()
 		},
 
 		// Error handler
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 
-			log.Println(err.Error())
+			log.Println(c.Route().Path + " | " + err.Error())
 
 			// Return error message
 			return c.SendStatus(401)
 		},
 	}))
 
+	// Setup routes
+	router.Route("/account", account.Authorized)
 }

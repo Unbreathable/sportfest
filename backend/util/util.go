@@ -2,6 +2,8 @@ package util
 
 import (
 	"crypto/rand"
+	"crypto/sha256"
+	"encoding/base64"
 	"log"
 	"math/big"
 
@@ -51,4 +53,16 @@ func FailedRequest(c *fiber.Ctx, error string, err error) error {
 
 func InvalidRequest(c *fiber.Ctx) error {
 	return c.SendStatus(fiber.StatusBadRequest)
+}
+
+// HashPassword hashes a password
+func HashPassword(password string) string {
+
+	// Get hash of password (Should be secure enough)
+	hash := sha256.Sum256([]byte(password))
+	for i := 0; i < 50; i++ {
+		hash = sha256.Sum256(hash[:])
+	}
+
+	return base64.StdEncoding.EncodeToString(hash[:])
 }

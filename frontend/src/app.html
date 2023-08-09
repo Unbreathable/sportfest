@@ -8,7 +8,6 @@
 		%sveltekit.head%
 	</head>
 	<body class="dark" data-sveltekit-preload-data="hover">
-
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 
@@ -28,7 +27,10 @@
 			--accent: #b62f2f;
 			--success: #70c770;
 
-			--line-spacing: 1.25rem;
+			--line-spacing-small: 1.25rem;
+			--line-spacing-medium: 1.75rem;
+			--line-spacing-large: 2.25rem;
+
 			--row-spacing: 0.5rem;
 			--def-spacing: 0.75rem;
 			--section-spacing: 1.5rem;
@@ -44,10 +46,6 @@
 
 			font-family: "Poppins","Helvetica Neue",Arial,sans-serif;
 			background-color: var(--background);
-		}
-
-		p {
-			line-height: var(--line-spacing);
 		}
 
 		.clickable {
@@ -99,14 +97,17 @@
 
 		.text-large {
 			font-size: var(--font-size-large);
+			line-height: var(--line-spacing-large);
 		}
 
 		.text-medium {
 			font-size: var(--font-size-medium);
+			line-height: var(--line-spacing-medium);
 		}
 
 		.text-small {
 			font-size: var(--font-size-small);
+			line-height: var(--line-spacing-small);
 		}
 
 		.text-bg {

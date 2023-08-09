@@ -29,10 +29,8 @@ type Year struct {
 	Mapping string `json:"mapping" gorm:"not null"` // In case we need to import a csv or something
 }
 
-type Account struct {
+type AdminAccount struct {
 	ID       uint   `json:"id" gorm:"primaryKey"`
-	Year     uint   `json:"year" gorm:"not null"`
-	Email    string `json:"email" gorm:"not null"`
+	Name     string `json:"email" gorm:"not null"`
 	Password string `json:"password" gorm:"not null"`
-	Admin    bool   `json:"admin" gorm:"not null"`
 }
