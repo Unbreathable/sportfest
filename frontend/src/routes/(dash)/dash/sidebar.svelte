@@ -70,8 +70,7 @@
 
     .content {
         padding: var(--def-spacing);
-        width: 400px;
-        max-width: 35%;
+        min-width: 400px;
         height: calc(100vh - 2 * var(--def-spacing));
         display: flex;
         flex-direction: column;

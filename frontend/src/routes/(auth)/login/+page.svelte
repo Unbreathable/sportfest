@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { postRq } from "$lib/config/requests";
+	import Dialog from "$lib/comp/dialog.svelte";
+	import { postRq } from "$lib/scripts/requests";
 	import { fade, scale } from "svelte/transition";
 
     let showPassword = false;
@@ -48,12 +49,10 @@
 </svelte:head>
 
 {#if error}
-<div transition:fade class="dialog-outer">
-    <div transition:scale class="dialog">
-        <p class="text-medium">{errorMessage}</p>
-        <button on:click={close} class="button">Verstanden</button>
-    </div>
-</div>
+<Dialog>
+    <p class="text-medium">{errorMessage}</p>
+    <button on:click={close} class="button">Verstanden</button>
+</Dialog>
 {/if}
 
 <div class="center">
@@ -73,7 +72,6 @@
 </div>
 
 <style lang="scss">
-    @import '$lib/styles/dialog.scss';
     @import '$lib/styles/comp.scss';
     @import '$lib/styles/form.scss';
 

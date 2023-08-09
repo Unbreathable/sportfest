@@ -1,35 +1,16 @@
-.dialog-outer {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
+.header {
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
+    gap: 1rem;
 }
 
-.dialog {
-    width: 100%;
-    max-width: 500px;
-    max-height: 600px;
-    background-color: var(--background);
-    border-radius: 1rem;
-    padding: 1rem;
+.content {
     display: flex;
+    width: 100%;
+    align-self: start;
     flex-direction: column;
-    gap: 1rem;
-
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-
-    .content {
-        overflow: scroll;
-        border-radius: 0.5rem;
-    }
+    gap: var(--def-spacing);
+    overflow: scroll;
+    border-radius: 0.5rem;
 }

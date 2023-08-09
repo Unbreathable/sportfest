@@ -24,9 +24,8 @@ type TeamMember struct {
 }
 
 type Year struct {
-	ID      uint   `json:"id" gorm:"primaryKey"`
-	Name    string `json:"name" gorm:"not null"`
-	Mapping string `json:"mapping" gorm:"not null"` // In case we need to import a csv or something
+	ID   uint   `json:"id" gorm:"primaryKey"`
+	Name string `json:"name" gorm:"not null"`
 }
 
 type AdminAccount struct {

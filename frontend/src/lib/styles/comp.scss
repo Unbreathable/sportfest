@@ -93,3 +93,11 @@ input {
         border: 2px solid var(--accent);
     }
 }
+
+.icon-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: var(--icon-button-padding);
+}
