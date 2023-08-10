@@ -10,6 +10,7 @@ type createAdminAccountRequest struct {
 	Name string `json:"name"`
 }
 
+// Route: /arq/account/create
 func createAdminAccount(c *fiber.Ctx) error {
 
 	// Parse request

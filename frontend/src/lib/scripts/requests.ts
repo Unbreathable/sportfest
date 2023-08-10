@@ -63,7 +63,7 @@ export async function postRqAuthorized(path: string, body: string) {
 
         return json
     } catch (e) {
-        console.error("/a" + path + " | " + e)
+        console.error(AUTH_BASE_PATH + path + " | " + e)
         return {success: false, message: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."}
     }
 }

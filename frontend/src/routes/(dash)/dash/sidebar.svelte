@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { slide } from "svelte/transition";
+	import TestToolbox from "./testToolbox.svelte";
+
+    let testToolkit = false;
 
     const teamLinks = [
         {
@@ -26,6 +29,10 @@
     ]
 
 </script>
+
+{#if testToolkit}
+<TestToolbox close={() => testToolkit = false} />
+{/if}
 
 <div class="content shadow">
     <h3 class="text-large">Sportfest: Manager</h3>
@@ -66,10 +73,22 @@
             <p class="text-medium">{link.name}</p>
         </a>
     {/each}
+
+    <div class="button-row">
+        <button class="button button-small button-secondary">Neues Adminkonto</button>
+        <button class="button button-small button-secondary" on:click={() => testToolkit = true}>Testwerkzeuge</button>
+    </div>
 </div>
 
 <style lang="scss">
     @import '$lib/styles/comp.scss';
+
+    .button-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: auto;
+    }
 
     .content {
         padding: var(--def-spacing);

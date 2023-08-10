@@ -2,19 +2,22 @@
 	import FormDialog from "$lib/comp/formDialog.svelte";
 	import { postRqAuthorized } from "$lib/scripts/requests";
 
-    let name = "";
     let loading = false;
     let error = "";
 
+    export let year = {
+        id: 0,
+        name: ""
+    };
     export let refresh: () => void;
     export let close: () => void;
 
-    async function create() {
+    async function del() {
         if(loading) return;
         loading = true;
 
-        const res = await postRqAuthorized("/years/create", JSON.stringify({
-            "name": name
+        const res = await postRqAuthorized("/years/delete", JSON.stringify({
+            "id": year.id
         }))
 
         if(!res.success) {
@@ -29,12 +32,11 @@
 
 </script>
 
-<FormDialog title="Jahrgang erstellen" {error} {close}>
+<FormDialog title="{year.name} löschen" {error} {close}>
 
     <div class="content">
-        <p>Gebe dem Jahrgang einen Namen:</p>
-        <input bind:value={name} placeholder="5. Klasse">
-        <button on:click={create} class="button">{loading ? "Wird erstellt.." : "Erstellen"}</button>
+        <p class="text-medium">Wenn du diesen Jahrgang löschst, werden auch <strong>ALLE Benutzer und Spiele</strong> des Jahrgangs gelöscht.</p>
+        <button class="button" on:click={del}>{loading ? "Wird gelöscht.." : "Löschen"}</button>
     </div>
 </FormDialog>
 

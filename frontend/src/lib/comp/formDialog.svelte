@@ -2,6 +2,8 @@
 	import Dialog from "$lib/comp/dialog.svelte";
 	import { slide } from "svelte/transition";
 
+    export let title: string;
+
     let alert = false;
     let errBefore = "";
     export let error: string;
@@ -21,7 +23,7 @@
 
 <Dialog>
     <div class="header">
-        <h3 class="headline">Jahrgang erstellen</h3>
+        <h3 class="headline">{title}</h3>
         <button on:click={close} class="icon-button"><span class="material-icons hover-accent icon-large">close</span></button>
     </div>
 

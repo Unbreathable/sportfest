@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { slide } from "svelte/transition";
+	import { fade, scale, slide } from "svelte/transition";
 	import YearCreateDialog from "./yearCreateDialog.svelte";
 	import { postRqAuthorized } from "$lib/scripts/requests";
 	import { onMount } from "svelte";
 	import ErrorDialog from "$lib/comp/errorDialog.svelte";
+	import YearDeleteDialog from "./yearDeleteDialog.svelte";
 
     let showYearCreateDialog = false;
+    const yearToDeleteDef = {
+        id: 0,
+        name: ""
+    }
+    let yearToDelete = yearToDeleteDef;
 
     let loading = true;
     let error = "";
@@ -20,7 +26,7 @@
         
         const res = await postRqAuthorized("/years/list", "");
         if(!res.success) {
-            error = res.error
+            error = res.message
             return
         }
 
@@ -29,6 +35,10 @@
     }
 
 </script>
+
+{#if yearToDelete.id != yearToDeleteDef.id}
+<YearDeleteDialog year={yearToDelete} refresh={() => loadData()} close={() => yearToDelete = yearToDeleteDef} />
+{/if}
 
 {#if showYearCreateDialog}
 <YearCreateDialog close={() => showYearCreateDialog = false} refresh={() => loadData()} />
@@ -45,7 +55,7 @@
     </div>
 
     {#if !loading}
-    <div in:slide class="years">
+    <div transition:fade class="years">
         {#if years.length == 0}
         <p class="text-medium">Keine Jahrgänge vorhanden</p>
         {/if}
@@ -56,8 +66,8 @@
                 <p class="text-medium">{year.name}</p>
             </div>
             <div class="row">
-                <button class="button button-small button-secondary" on:click={() => goto("/dash/years/123/members")}>Überblick</button>
-                <button class="button button-small button-secondary">Löschen</button>
+                <button class="button button-small button-secondary" on:click={() => goto("/dash/years/" + year.id + "/members")}>Überblick</button>
+                <button class="button button-small button-secondary" on:click={() => yearToDelete = year}>Löschen</button>
             </div>
         </div>
         {/each}
