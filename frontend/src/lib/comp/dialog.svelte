@@ -1,9 +1,10 @@
 <script>
 
 	import { fade, scale } from "svelte/transition";
+    export const index = 100;
 
 </script>
-<div transition:fade class="dialog-outer">
+<div style="z-index: {index};" transition:fade class="dialog-outer">
     <div transition:scale class="dialog">
         <slot />
     </div>

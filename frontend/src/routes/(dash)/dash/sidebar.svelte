@@ -1,24 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-
-
-    const platformLinks = [
-        {
-            icon: "group",
-            name: "Teilnehmer",
-            link: "/dash/users"
-        },
-        {
-            icon: "school",
-            name: "Jahrgänge",
-            link: "/dash/years"
-        },
-        {
-            icon: "joystick",
-            name: "Auswählbare Spiele",
-            link: "/dash/games"
-        }
-    ]
+	import { slide } from "svelte/transition";
 
     const teamLinks = [
         {
@@ -49,12 +31,33 @@
     <h3 class="text-large">Sportfest: Manager</h3>
 
     <p class="text-small hl">Plattform einrichten</p>
-    {#each platformLinks as link}
-        <a href={link.link} class="link {$page.url.pathname.includes(link.link) ? "link-selected" : ""}">
-            <span class="material-icons icon-medium icon-accent">{link.icon}</span>
-            <p class="text-medium">{link.name}</p>
-        </a>
-    {/each}
+    <a href="/dash/users" class="link {$page.url.pathname == "/dash/users" ? "link-selected" : ""}">
+        <span class="material-icons icon-medium icon-accent">group</span>
+        <p class="text-medium">Teilnehmer</p>
+    </a>
+
+    <a href="/dash/years" class="link {$page.url.pathname.includes("/dash/years") ? "link-selected" : ""}">
+        <span class="material-icons icon-medium icon-accent">school</span>
+        <p class="text-medium">Jahrgänge</p>
+    </a>
+    {#if $page.url.pathname != "/dash/years" && $page.url.pathname.startsWith("/dash/years")}
+        <div transition:slide class="link-below">
+            <a href="/dash/years/{$page.params.yearId}/members" class="link {$page.url.pathname.endsWith("/members") ? "link-secondary" : ""}">
+                <span class="material-icons icon-medium icon-accent">group</span>
+                <p class="text-medium">Mitglieder</p>
+            </a>
+
+            <a href="/dash/years/{$page.params.yearId}/matches" class="link {$page.url.pathname.endsWith("/matches") ? "link-secondary" : ""}">
+                <span class="material-icons icon-medium icon-accent">sports_volleyball</span>
+                <p class="text-medium">Spiele</p>
+            </a>
+        </div>
+    {/if}
+
+    <a href="/dash/games" class="link {$page.url.pathname == "/dash/games" ? "link-selected" : ""}">
+        <span class="material-icons icon-medium icon-accent">joystick</span>
+        <p class="text-medium">Auswählbare Spiele</p>
+    </a>
 
     <p class="text-small hl">Das Fest erstellen</p>
     {#each teamLinks as link}
@@ -74,16 +77,21 @@
         height: calc(100vh - 2 * var(--def-spacing));
         display: flex;
         flex-direction: column;
-        gap: calc(var(--row-spacing)/2);
     }
 
     .hl {
         font-weight: bold;
         margin-top: var(--def-spacing);
+        margin-bottom: calc(var(--def-spacing)/2);
+    }
+
+    .hl-small {
+        margin-bottom: calc(var(--def-spacing)/2);
     }
 
     .link {
         text-decoration: none;
+        margin-bottom: calc(var(--def-spacing)/2);
         color: var(--text-color);
         display: flex;
         align-items: center;
@@ -92,6 +100,19 @@
         border-radius: var(--def-spacing);
         transition: 250ms all ease;
     
+        &:hover {
+            background-color: var(--secondary);
+        }
+    }
+
+    .link-secondary {
+        background-color: var(--secondary);
+        color: var(--text-color);
+
+        .material-icons {
+            color: var(--accent);
+        }
+
         &:hover {
             background-color: var(--secondary);
         }
@@ -108,6 +129,10 @@
         &:hover {
             background-color: var(--primary);
         }
+    }
+
+    .link-below {
+        margin: 0 0 var(--def-spacing) var(--def-spacing);
     }
 
 </style>

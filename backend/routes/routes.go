@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/Unbreathable/sportfest/backend/routes/account"
+	"github.com/Unbreathable/sportfest/backend/routes/years"
 	"github.com/Unbreathable/sportfest/backend/util"
 	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
@@ -44,4 +45,5 @@ func AuthorizedRoutes(router fiber.Router) {
 
 	// Setup routes
 	router.Route("/account", account.Authorized)
+	router.Route("/years", years.Authorized)
 }

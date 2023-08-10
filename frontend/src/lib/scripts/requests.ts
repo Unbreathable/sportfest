@@ -1,3 +1,5 @@
+import { goto } from "$app/navigation"
+
 export const BASE_PATH = "http://localhost:3000"
 export const AUTH_BASE_PATH = "http://localhost:3000/arq"
 
@@ -42,6 +44,12 @@ export async function postRqAuthorized(path: string, body: string) {
             },
         })
 
+        if(res.status == 401) {
+            console.error(res.status + " " + path)
+            goto("/login");
+            return {success: false, message: "Unauthorized"}
+        }
+
         if(res.status != 200) {
             console.error(res.status + " " + path)
             return {success: false}
@@ -56,6 +64,6 @@ export async function postRqAuthorized(path: string, body: string) {
         return json
     } catch (e) {
         console.error("/a" + path + " | " + e)
-        return {success: false}
+        return {success: false, message: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."}
     }
 }
