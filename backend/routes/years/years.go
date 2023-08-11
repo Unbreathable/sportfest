@@ -8,4 +8,5 @@ func Authorized(router fiber.Router) {
 	router.Post("/get", getYear)
 	router.Post("/delete", deleteYear)
 	router.Post("/default", createDefault)
+	router.Post("/users", users)
 }

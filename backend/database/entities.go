@@ -20,11 +20,11 @@ type Match struct {
 }
 
 type TeamMember struct {
-	ID      uint `json:"id" gorm:"primaryKey"`
-	Team    uint `json:"team" gorm:"not null"` // Team1 or Team2 (0 or 1)
-	Match   uint `json:"match" gorm:"not null"`
-	Game    uint `json:"game" gorm:"not null"`
-	Account uint `json:"name" gorm:"not null"`
+	ID    uint `json:"id" gorm:"primaryKey"`
+	Team  uint `json:"team" gorm:"not null"` // Team1 or Team2 (0 or 1)
+	Match uint `json:"match" gorm:"not null"`
+	Game  uint `json:"game" gorm:"not null"`
+	User  uint `json:"user" gorm:"not null"`
 }
 
 type Year struct {

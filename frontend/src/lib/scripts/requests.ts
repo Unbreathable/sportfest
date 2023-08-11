@@ -16,7 +16,7 @@ export async function postRq(path: string, body: string) {
 
         if(res.status != 200) {
             console.error(res.status + " " + path)
-            return {success: false}
+            return {success: false, message: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."}
         }
 
         const json = await res.json()
@@ -28,7 +28,7 @@ export async function postRq(path: string, body: string) {
         return json
     } catch (e) {
         console.error(path + " | " + e)
-        return {success: false}
+        return {success: false, message: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut."}
     }
 }
 

@@ -5,6 +5,7 @@ import (
 
 	"github.com/Unbreathable/sportfest/backend/routes/account"
 	"github.com/Unbreathable/sportfest/backend/routes/games"
+	"github.com/Unbreathable/sportfest/backend/routes/users"
 	"github.com/Unbreathable/sportfest/backend/routes/years"
 	"github.com/Unbreathable/sportfest/backend/util"
 	jwtware "github.com/gofiber/contrib/jwt"
@@ -15,6 +16,7 @@ func SetupRoutes(router fiber.Router) {
 
 	// Unauthorized routes
 	router.Route("/account", account.SetupRoutes)
+	router.Route("/users", users.Unauthorized)
 
 	// Setup authorized routes
 	router.Route("/arq", AuthorizedRoutes)
@@ -48,4 +50,5 @@ func AuthorizedRoutes(router fiber.Router) {
 	router.Route("/account", account.Authorized)
 	router.Route("/years", years.Authorized)
 	router.Route("/games", games.Authorized)
+	router.Route("/users", users.Authorized)
 }

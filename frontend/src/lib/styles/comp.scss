@@ -83,7 +83,7 @@
 input, textarea {
     padding: var(--input-padding);
     border: 2px solid var(--secondary);
-    border-radius: 0.5rem;
+    border-radius: var(--def-spacing);
     transition: 250ms all ease;
     outline: none;
     color: var(--text);

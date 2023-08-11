@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import FormDialog from "$lib/comp/formDialog.svelte";
 	import { postRqAuthorized } from "$lib/scripts/requests";
 
@@ -6,6 +6,7 @@
     let doing = false;
 
     async function createStandardYears() {
+        if(doing) return;
         doing = true;
         await postRqAuthorized("/years/default", "");
         doing = false;
@@ -13,10 +14,24 @@
     }
 
     async function createStandardGames() {
+        if(doing) return;
         doing = true;
         await postRqAuthorized("/games/default", "");
         doing = false;
         location.assign("/dash/games");
+    }
+
+    // Simulation
+    let minPerYear: Number, maxPerYear: Number;
+    async function createUsers() {
+        if(doing) return;
+        doing = true;
+        await postRqAuthorized("/users/simulation", JSON.stringify({
+            "minPerYear": minPerYear,
+            "maxPerYear": maxPerYear,
+        }));
+        doing = false;
+        location.assign("/dash/users");
     }
 
 </script>
@@ -30,10 +45,9 @@
 
     <div class="section">
         <p class="text-medium">Test Teilnehmer erstellen</p>
-        <input type="number" placeholder="Minimale Anzahl pro Jahrgang">
-        <input type="number" placeholder="Maximale Anzahl pro Jahrgang">
-        <input type="number" placeholder="Anzahl an Freundschaften">
-        <button class="button">Teilnehmer erstellen</button>
+        <input type="number" bind:value={minPerYear} placeholder="Minimale Anzahl pro Jahrgang">
+        <input type="number" bind:value={maxPerYear} placeholder="Maximale Anzahl pro Jahrgang">
+        <button class="button" on:click={createUsers}>{doing ? "Laden.." : "Teilnehmer erstellen"}</button>
     </div>
 
     <div class="section">
