@@ -8,6 +8,7 @@
     
     <div class="settings">
         <slot />
+        <div class="spacer"></div>
     </div>
 </div>
 
@@ -22,6 +23,7 @@
     .settings {
         padding: var(--section-spacing);
         width: 100%;
+        overflow-y: scroll;
     }
 
 </style>

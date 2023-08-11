@@ -7,6 +7,7 @@ type Game struct {
 	ID          uint   `json:"id" gorm:"primaryKey"`
 	Name        string `json:"name" gorm:"not null"`
 	Description string `json:"description" gorm:"not null"`
+	Video       string `json:"video" gorm:"not null"`
 	MinTeamSize uint   `json:"minTeamSize" gorm:"not null"`
 	MaxTeamSize uint   `json:"maxTeamSize" gorm:"not null"`
 }

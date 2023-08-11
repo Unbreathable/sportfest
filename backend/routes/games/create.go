@@ -1,4 +1,4 @@
-package years
+package games
 
 import (
 	"github.com/Unbreathable/sportfest/backend/database"
@@ -9,8 +9,9 @@ import (
 type createGameRequest struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
-	MinTeamSize uint   `json:"min_size"`
-	MaxTeamSize uint   `json:"max_size"`
+	Video       string `json:"video"`
+	MinTeamSize uint   `json:"minTeamSize"`
+	MaxTeamSize uint   `json:"maxTeamSize"`
 }
 
 // Route: /arq/games/create

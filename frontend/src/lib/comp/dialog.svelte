@@ -26,7 +26,8 @@
     .dialog {
         width: 100%;
         max-width: 500px;
-        max-height: 600px;
+        max-height: 80%;
+        overflow-y: scroll;
         background-color: var(--background);
         border-radius: 1rem;
         padding: 1rem;

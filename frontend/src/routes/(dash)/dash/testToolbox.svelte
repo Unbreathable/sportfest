@@ -29,11 +29,17 @@
     </div>
 
     <div class="section">
-        <p class="text-medium">Sportfest Simulation</p>
+        <p class="text-medium">Test Teilnehmer erstellen</p>
         <input type="number" placeholder="Minimale Anzahl pro Jahrgang">
         <input type="number" placeholder="Maximale Anzahl pro Jahrgang">
         <input type="number" placeholder="Anzahl an Freundschaften">
-        <button class="button">Simulation starten</button>
+        <button class="button">Teilnehmer erstellen</button>
+    </div>
+
+    <div class="section">
+        <p class="text-medium">Test Auswahlen treffen</p>
+        <p class="text-small">Wenn du den Knopf drückst, wählt ein Programm für jeden Benutzer zufällig zwischen allen Auswählbaren Spielen 3-5 Spiele aus.</p>
+        <button class="button">Auswahlen treffen</button>
     </div>
 </FormDialog>
 

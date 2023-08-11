@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { fade, scale, slide } from "svelte/transition";
+	import { fade } from "svelte/transition";
 	import YearCreateDialog from "./yearCreateDialog.svelte";
 	import { postRqAuthorized } from "$lib/scripts/requests";
 	import { onMount } from "svelte";
@@ -80,7 +80,6 @@
 
     .site {
         width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: column;
         gap: var(--section-spacing);

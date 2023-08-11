@@ -1,4 +1,4 @@
-package years
+package games
 
 import "github.com/gofiber/fiber/v2"
 

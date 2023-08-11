@@ -66,7 +66,7 @@
         <p class="text-medium">Auswählbare Spiele</p>
     </a>
 
-    <p class="text-small hl">Das Fest erstellen</p>
+    <p class="text-small hl">Die Teams erstellen</p>
     {#each teamLinks as link}
         <a href={link.link} class="link">
             <span class="material-icons icon-medium icon-accent">{link.icon}</span>
