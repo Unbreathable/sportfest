@@ -37,7 +37,6 @@ func SortAlgorithm(years *[]Year, games *[]Game, players *[]*Player) {
 				playableGame.LeftPlayerAmount += amount % (gameMap[game].MinTeamSize * 2)
 				for i := 0; i < matches; i++ {
 					playableGame.AvailableMatches = append(playableGame.AvailableMatches, &Match{
-						ID:       GenerateToken(20),
 						TeamSize: gameMap[game].MinTeamSize,
 						Game:     game,
 					})

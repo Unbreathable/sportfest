@@ -17,11 +17,6 @@
             link: "/dash/matches"
         },
         {
-            icon: "problem",
-            name: "Fehler",
-            link: "/dash/problems"
-        },
-        {
             icon: "calendar_month",
             name: "Zeitplan (Kommt noch)",
             link: "/dash/schedule"
@@ -66,13 +61,11 @@
         <p class="text-medium">Auswählbare Spiele</p>
     </a>
 
-    <p class="text-small hl">Die Teams erstellen</p>
-    {#each teamLinks as link}
-        <a href={link.link} class="link">
-            <span class="material-icons icon-medium icon-accent">{link.icon}</span>
-            <p class="text-medium">{link.name}</p>
-        </a>
-    {/each}
+    <p class="text-small hl">Teams und Zeitplan</p>
+    <a href="/dash/teams" class="link {$page.url.pathname == "/dash/teams" ? "link-selected" : ""}">
+        <span class="material-icons icon-medium icon-accent">hardware</span>
+        <p class="text-medium">Teameinteilung</p>
+    </a>
 
     <div class="button-row">
         <button class="button button-small button-secondary">Neues Adminkonto</button>

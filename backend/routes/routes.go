@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/Unbreathable/sportfest/backend/routes/account"
+	"github.com/Unbreathable/sportfest/backend/routes/algorithm"
 	"github.com/Unbreathable/sportfest/backend/routes/games"
 	"github.com/Unbreathable/sportfest/backend/routes/users"
 	"github.com/Unbreathable/sportfest/backend/routes/years"
@@ -51,4 +52,5 @@ func AuthorizedRoutes(router fiber.Router) {
 	router.Route("/years", years.Authorized)
 	router.Route("/games", games.Authorized)
 	router.Route("/users", users.Authorized)
+	router.Route("/algorithm", algorithm.Authorized)
 }

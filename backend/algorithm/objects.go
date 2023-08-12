@@ -13,7 +13,6 @@ type PlayableGame struct {
 }
 
 type Match struct {
-	ID       string
 	Game     uint
 	TeamSize int
 	Team1    []*Player
@@ -29,11 +28,10 @@ func (m *Match) GetTeam(team int) []*Player {
 }
 
 type Year struct {
-	ID               uint
-	Player           []*Player
-	GameAmount       map[uint]int
-	Playable         map[uint]*PlayableGame
-	PlayerSelections map[string][]*Player
+	ID         uint
+	Player     []*Player
+	GameAmount map[uint]int
+	Playable   map[uint]*PlayableGame
 }
 
 type Player struct {

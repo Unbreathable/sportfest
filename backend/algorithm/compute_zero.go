@@ -53,11 +53,6 @@ func computeBestTeam(player *Player, year *Year) ([]*Match, int) {
 		}
 	}
 
-	// Check if there are any matches
-	if len(team1Matches) == 0 && len(team2Matches) == 0 {
-		FoundFlaw("No matches found for player")
-	}
-
 	// Eliminate matches with same game
 	team1Matches = removeDuplicates(team1Matches)
 	team2Matches = removeDuplicates(team2Matches)

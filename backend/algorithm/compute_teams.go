@@ -1,7 +1,5 @@
 package algorithm
 
-import "fmt"
-
 type Pair struct {
 	PairSize         int
 	Player1          *Player
@@ -147,11 +145,6 @@ func ComputeBestTeamOverlapping(pair *Pair, year *Year) ([]*Match, int) {
 				team2Matches = append(team2Matches, match)
 			}
 		}
-	}
-
-	// Check if there are any matches
-	if len(team1Matches) == 0 && len(team2Matches) == 0 {
-		FoundFlaw(fmt.Sprintf("No matches found for pair: %d + %d", pair.Player1.ID, pair.Player2.ID))
 	}
 
 	// Eliminate matches with same game

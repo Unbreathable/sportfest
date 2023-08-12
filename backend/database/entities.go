@@ -42,6 +42,7 @@ type User struct {
 	ID   uint   `json:"id" gorm:"primaryKey"`
 	Name string `json:"name" gorm:"not null"`
 	Code string `json:"code" gorm:"not null"`
+	Team uint   `json:"team"`                 // Team1 or Team2 (0 or 1)
 	Year uint   `json:"year" gorm:"not null"` // Year ID
 }
 
