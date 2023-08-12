@@ -34,6 +34,27 @@
         location.assign("/dash/users");
     }
 
+    // Choice simulation
+    async function createChoices() {
+        if(doing) return;
+        doing = true;
+        await postRqAuthorized("/users/choicesimulation", JSON.stringify({}));
+        doing = false;
+        //location.assign("/dash/users");
+    }
+
+    // Friendship simulation
+    let friendships: number;
+    async function createFriends() {
+        if(doing) return;
+        doing = true;
+        await postRqAuthorized("/users/friends/simulation", JSON.stringify({
+            "friendships": friendships,
+        }));
+        doing = false;
+        location.assign("/dash/users");
+    }
+
 </script>
 
 <FormDialog error="" title="Testwerkzeuge" {close}>
@@ -53,7 +74,13 @@
     <div class="section">
         <p class="text-medium">Test Auswahlen treffen</p>
         <p class="text-small">Wenn du den Knopf drückst, wählt ein Programm für jeden Benutzer zufällig zwischen allen Auswählbaren Spielen 3-5 Spiele aus.</p>
-        <button class="button">Auswahlen treffen</button>
+        <button class="button" on:click={createChoices}>{doing ? "Laden.." : "Auswahlen treffen"}</button>
+    </div>
+
+    <div class="section">
+        <p class="text-medium">Test Freundschaften erstellen</p>
+        <input type="number" bind:value={friendships} placeholder="Anzahl an Freundschaften">
+        <button class="button" on:click={createFriends}>{doing ? "Laden.." : "Erstellen"}</button>
     </div>
 </FormDialog>
 

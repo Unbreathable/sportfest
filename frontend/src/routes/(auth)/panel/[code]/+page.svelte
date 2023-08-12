@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import ErrorDialog from "$lib/comp/errorDialog.svelte";
 	import { postRq } from "$lib/scripts/requests";
     import { onMount } from "svelte";
+	import FriendSetup from "./friendSetup.svelte";
 
     let error = "";
     let loadingGames = true;
@@ -11,7 +13,7 @@
     let games: any[] = [];
 
     onMount(() => {
-        console.log($page.params.code);
+        localStorage.setItem("code", $page.params.code);
         loadGames();
     })
 
@@ -33,18 +35,6 @@
         })
 
         loadingGames = false;
-    }
-
-
-    let copied = false;
-    let ownCode = "5-W03-ABCDEF";
-
-    function copyOwnCode() {
-        navigator.clipboard.writeText(ownCode);
-        copied = true;
-        setTimeout(() => {
-            copied = false;
-        }, 2000);
     }
 
     let choiceLoading = false;
@@ -135,22 +125,7 @@
                 {/each}
             </div>
 
-            <p class="text-medium text-hl">Freund definieren</p>
-            <p class="text-small">Gebe hier den Code eines Freundes ein:</p>
-            <div class="row">
-                <input placeholder="5-W03-ABCDEF">
-                <button class="button">Hinzufügen</button>
-            </div>
-            <p class="text-small">Wenn du den Code deines Freundes eingeben hast, <strong>muss</strong> dein Freund auch deinen Code eingeben:</p>
-            <div class="row">
-                <input bind:value={ownCode} disabled>
-                <button class="button {copied ? "button-success" : ""}" on:click={copyOwnCode}>{copied ? "Kopiert!" : "Kopieren"}</button>
-            </div>
-            <p class="text-small">Wenn ihr beide eure Codes bei euch gegenseitig eingetragen habt, kannst du hier den Status überprüfen.</p>
-            <div class="row sb">
-                <p class="text-medium">Der Code ist noch nicht bei deinem Freund eingetragen.</p>
-                <button class="button">Aktualisieren</button>
-            </div>
+            <FriendSetup error={(msg) => requestError = msg} />
             {/if}
         </div>
         <div class="spacer"></div>

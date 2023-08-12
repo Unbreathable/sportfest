@@ -50,3 +50,9 @@ type Choice struct {
 	User   uint `json:"user" gorm:"not null"`   // User ID
 	Choice uint `json:"choice" gorm:"not null"` // Game choice
 }
+
+type Friendship struct {
+	ID         uint   `json:"id" gorm:"primaryKey"` // Account ID
+	Code       string `json:"code" gorm:"not null"` // Friend code
+	FriendCode string `json:"friendCode"`           // The friend code of the other user
+}

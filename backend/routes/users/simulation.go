@@ -49,3 +49,53 @@ func simulation(c *fiber.Ctx) error {
 
 	return util.SuccessfulRequest(c)
 }
+
+func choiceSimulation(c *fiber.Ctx) error {
+
+	var users []database.User
+	if database.DBConn.Find(&users).Error != nil {
+		return util.InvalidRequest(c)
+	}
+
+	var games []database.Game
+	if database.DBConn.Find(&games).Error != nil {
+		return util.InvalidRequest(c)
+	}
+
+	for _, user := range users {
+
+		// Generate random amount of choices
+		amount := util.RandomInt(MinChoices, MaxChoices+1)
+		var chosen []uint
+		for i := 0; i < amount; i++ {
+
+			// Generate random choice
+			game := games[util.RandomInt(0, len(games))].ID
+			if contains(chosen, game) {
+				i--
+				continue
+			}
+			chosen = append(chosen, game)
+
+			// Create choice
+			choice := database.Choice{
+				User:   user.ID,
+				Choice: game,
+			}
+			if err := database.DBConn.Create(&choice).Error; err != nil {
+				return util.InvalidRequest(c)
+			}
+		}
+	}
+
+	return util.SuccessfulRequest(c)
+}
+
+func contains(arr []uint, val uint) bool {
+	for _, v := range arr {
+		if v == val {
+			return true
+		}
+	}
+	return false
+}
