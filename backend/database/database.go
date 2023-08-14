@@ -25,6 +25,6 @@ func Setup() {
 	log.Println("Connection opened to PostgreSQL")
 
 	// Migrate the schema
-	DBConn.AutoMigrate(&AdminAccount{}, &Game{}, &Match{}, &TeamMember{}, &Year{}, &User{}, &Choice{}, &Friendship{})
+	DBConn.AutoMigrate(&AdminAccount{}, &Game{}, &Match{}, &TeamMember{}, &Year{}, &User{}, &Choice{}, &Friendship{}, &Flaw{})
 
 }

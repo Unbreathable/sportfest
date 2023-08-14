@@ -5,24 +5,6 @@
 
     let testToolkit = false;
 
-    const teamLinks = [
-        {
-            icon: "construction",
-            name: "Algorithmus",
-            link: "/dash/algorithm"
-        },
-        {
-            icon: "sports_volleyball",
-            name: "Spiele",
-            link: "/dash/matches"
-        },
-        {
-            icon: "calendar_month",
-            name: "Zeitplan (Kommt noch)",
-            link: "/dash/schedule"
-        }
-    ]
-
 </script>
 
 {#if testToolkit}
@@ -65,6 +47,11 @@
     <a href="/dash/teams" class="link {$page.url.pathname == "/dash/teams" ? "link-selected" : ""}">
         <span class="material-icons icon-medium icon-accent">hardware</span>
         <p class="text-medium">Teameinteilung</p>
+    </a>
+
+    <a href="/dash/matches" class="link {$page.url.pathname.startsWith("/dash/matches") ? "link-selected" : ""}">
+        <span class="material-icons icon-medium icon-accent">sports_volleyball</span>
+        <p class="text-medium">Spiele</p>
     </a>
 
     <div class="button-row">

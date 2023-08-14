@@ -57,3 +57,15 @@ type Friendship struct {
 	Code       string `json:"code" gorm:"not null"` // Friend code
 	FriendCode string `json:"friendCode"`           // The friend code of the other user
 }
+
+const FlawTypeTeamInvalid = "team_invalid"
+const FlawTypeTeamEmpty = "team_empty"
+const FlawTypePlayerNotHandled = "player_not_handled"
+
+// Flaw is a mistake found by the flaw algorithm
+type Flaw struct {
+	ID          uint   `json:"id" gorm:"primaryKey"`
+	Type        string `json:"type" gorm:"not null"`        // Type of flaw
+	Description string `json:"description" gorm:"not null"` // Description of flaw
+	Target      uint   `json:"target" gorm:"not null"`      // User ID
+}

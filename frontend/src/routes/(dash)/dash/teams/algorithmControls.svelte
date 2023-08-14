@@ -30,9 +30,24 @@
             return;
         }
 
-        error = "hallo welt";
+        error = "";
         result = res.logs;
         working = false;
+    }
+    
+    async function acceptResult() {
+        if(working) return;
+        working = true;
+
+        const res = await postRqAuthorized("/algorithm/accept", "");
+        if(!res.success) {
+            error = res.message;
+            working = false;
+            return;
+        }
+
+        working = false;
+        result = ["Der Algorithmus wurde erfolgreich ausgeführt."];
     }
 
 </script>
@@ -50,7 +65,7 @@
                     <p class="text-medium">{line}</p>
                 {/each}
                 <div class="buttons">
-                    <button class="button">{working ? "Wird akzeptiert.." : "Versuch akzeptieren"}</button>
+                    <button class="button" on:click={acceptResult}>{working ? "Wird akzeptiert.." : "Versuch akzeptieren"}</button>
                     <button class="button button-secondary" on:click={startAlgorithm}>{working ? "Wird durchgeführt.." : "Nochmal durchführen"}</button>
                 </div>
             {/if}
